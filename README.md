@@ -1,6 +1,6 @@
 # Vue.js SPA project starter template
 
-An opinionated groundwork for building a single page app (SPA) based on Vue.js, vuex and vue-rx, with a Firebase backend.
+Template for building a single page app (SPA) with Vue.js and Firebase.
 
 ## Setup local development
 
@@ -13,14 +13,14 @@ npm run dev
 ```
 
 ## build for production and view the bundle analyzer report
-npm run build --report
+`npm run build --report`
 
 ## run unit tests
-npm run unit
+`npm run unit`
 
 ## run all tests
-npm test
-```
+`npm test`
+
 
 # TODO
 
