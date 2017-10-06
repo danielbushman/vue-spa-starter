@@ -1,0 +1,20 @@
+.DS_Store
+node_modules/
+npm-debug.log
+yarn-error.log
+.idea
+.idea/workspace.xml
+.vscode
+
+# Directories
+/.idea
+/node_modules
+/.vscode
+/dist
+
+# Files
+*.DS_Store
+.idea/workspace.xml
+/bin/ngrok
+npm-debug.log
+TODO.md

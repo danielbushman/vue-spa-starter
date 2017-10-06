@@ -1,0 +1,14 @@
+
+$gotham-font-path: '~style/fonts/gotham';
+@font-face {
+    font-family: 'Cobblepot';
+    src: url('#{$gotham-font-path}/bold/cobblepot-bold-webfont.eot');
+    src: url('#{$gotham-font-path}/bold/cobblepot-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$gotham-font-path}/bold/cobblepot-bold-webfont.woff') format('woff'),
+         url('#{$gotham-font-path}/bold/cobblepot-bold-webfont.ttf') format('truetype'),
+         url('#{$gotham-font-path}/bold/cobblepot-bold-webfont.svg#CobblepotBold') format('svg');
+    font-weight: $font_weight_bold;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i');
