@@ -28,10 +28,10 @@ rm(path.resolve(__dirname, '../dist'), err => {
       chunkModules: false
     }) + '\n\n')
 
-	if (stats.compilation.errors.length > 0) {
-		console.log(chalk.red('\n\n********************************* 😤\n\n    Build failed!\n\n********************************* 😰\n\n'))
-		process.exit(1);
-	}
+  if (stats.compilation.errors.length > 0) {
+    console.log(chalk.red('\n\n********************************* 😤\n\n    Build failed!\n\n********************************* 😰\n\n'))
+    process.exit(1);
+  }
 
     console.log(chalk.cyan('  Build complete.\n'))
   })

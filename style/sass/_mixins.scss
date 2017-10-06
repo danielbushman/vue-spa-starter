@@ -14,36 +14,36 @@
 // ---------------
 
 @function type-scale($scale){
-	@return round(modular-scale($scale, $default_font_size, $type-scale-ratio));
+  @return round(modular-scale($scale, $default_font_size, $type-scale-ratio));
 };
 
 @mixin FontAwesome($icon:""){
-	font-family: "FontAwesome" !important;
-	speak: none;
-	font-weight: normal !important;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+  font-family: "FontAwesome" !important;
+  speak: none;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-	content: $icon;
-	display: inline-block;
+  content: $icon;
+  display: inline-block;
 }
 
 @mixin OpenSans{
-	font-family: 'Open Sans', sans-serif;
-	letter-spacing: 0.02em;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 0.02em;
 
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @mixin Gotham{
-	font-family: 'Cobblepot', sans-serif;
-	letter-spacing: 0.01em;
+  font-family: 'Cobblepot', sans-serif;
+  letter-spacing: 0.01em;
 
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

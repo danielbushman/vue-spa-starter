@@ -1,0 +1,74 @@
+{
+  root: true,
+  extends: [
+    'plugin:vue-libs/recommended'
+  ],
+  parser: 'babel-eslint',
+  parserOptions: {
+    sourceType: 'module'
+  },
+  // required to lint *.vue files
+  plugins: [
+    'html'
+  ],
+  rules: {
+
+    // allow paren-less arrow functions
+    arrow-parens: 0,
+
+    // http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
+    // semi: ['never'],
+
+    no-tabs: 2,
+    indent:  ['error', 2, { 'SwitchCase': 1 }],
+    key-spacing: ['error', { 'mode': 'strict' }],
+    no-fallthrough: ['error', { 'commentPattern': 'break[\\s\\w]*omitted' }],
+
+    generator-star-spacing: 0,
+    no-var: 'error',
+
+    comma-dangle: ['error', 'only-multiline'],
+    comma-spacing: ['error', { 'before': false, 'after': true }]
+
+  }
+}
+
+// // http://eslint.org/docs/user-guide/configuring
+//
+// module.exports = {
+//   root: true,
+//   parser: 'babel-eslint',
+//   parserOptions: { sourceType: 'module' },
+//   env: { browser: true },
+//
+//   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
+//   extends: 'standard',
+//
+//   // required to lint *.vue files
+//   plugins: [ 'html' ],
+//
+//   // add your custom rules here
+//   'rules': {
+//
+//     // allow paren-less arrow functions
+//     'arrow-parens': 0,
+//
+//     semi: ["error", "always"],
+//
+//     // tabbed indentation
+//     'indent': ['error', 'tab'],
+//     'no-tabs': 0,
+//
+//     // allow async-await
+//     'generator-star-spacing': 0,
+//
+//     // allow object keys to be tabbed or spaced
+//     'key-spacing': ["error", { "mode": "minimum" }],
+//
+//     // allow blank line at beginning of block
+//     'padded-blocks': 0,
+//
+//     // allow debugger during development
+//     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+//   }
+// }

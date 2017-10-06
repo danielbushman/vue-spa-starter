@@ -16,19 +16,19 @@ while test $# -gt 0; do
             exit 0
             ;;
         --env=*)
-			ENVIRONMENT=`echo $1 | sed -e 's/^[^=]*=//g'`
-			shift
+      ENVIRONMENT=`echo $1 | sed -e 's/^[^=]*=//g'`
+      shift
             ;;
         *)
-			break
-			;;
+      break
+      ;;
     esac
 done
 
 read -p "Deploy to [heroku-$ENVIRONMENT] from [$LOCAL_BRANCH]? (y/n) " CONT
 echo
 if [[ "$CONT" != "y" ]]; then
-	exit 1
+  exit 1
 fi
 
 echo
@@ -39,80 +39,80 @@ echo
 
 FAILURE=true
 case $ENVIRONMENT in
-	dev|qa)
-		echo
-		echo "Building for $ENVIRONMENT"
-		[[ "$ENVIRONMENT" != "dev" ]] && arg="--env=$ENVIRONMENT" || arg=""
-		echo "npm run build $arg"
-		if npm run build "$arg"; then
-			FAILURE=false
-			echo "Build success 😎"
-		else
-			echo "Build failed 😱"
-		fi
-		;;
-	*)
-		echo
-		echo "Invalid env provided: $ENVIRONMENT"
-		exit 1
-		;;
+  dev|qa)
+    echo
+    echo "Building for $ENVIRONMENT"
+    [[ "$ENVIRONMENT" != "dev" ]] && arg="--env=$ENVIRONMENT" || arg=""
+    echo "npm run build $arg"
+    if npm run build "$arg"; then
+      FAILURE=false
+      echo "Build success 😎"
+    else
+      echo "Build failed 😱"
+    fi
+    ;;
+  *)
+    echo
+    echo "Invalid env provided: $ENVIRONMENT"
+    exit 1
+    ;;
 esac
 
 if $FAILURE; then
 
-	echo
-	echo "I'm not going to deploy until you fix the build, Dude. Sorry. 🙄"
-	echo
+  echo
+  echo "I'm not going to deploy until you fix the build, Dude. Sorry. 🙄"
+  echo
 
 else
 
-	echo
-	echo "Adding the dist hash to the history"
-	ls ../dist >> $ENVIRONMENT-dist-hash-history.log
-	HASH=$( tail -n 1 $ENVIRONMENT-dist-hash-history.log )
-	echo
-	echo "Previous hash   $PREV_HASH"
-	echo "New hash        $HASH"
-	echo
+  echo
+  echo "Adding the dist hash to the history"
+  ls ../dist >> $ENVIRONMENT-dist-hash-history.log
+  HASH=$( tail -n 1 $ENVIRONMENT-dist-hash-history.log )
+  echo
+  echo "Previous hash   $PREV_HASH"
+  echo "New hash        $HASH"
+  echo
 
-	if [ "$PREV_HASH" != "$HASH" ] ; then
-		# Keep awscli updated
-		echo
-		echo "Keeping awscli updated"
-		echo
-		pip install --upgrade --user awscli
+  if [ "$PREV_HASH" != "$HASH" ] ; then
+    # Keep awscli updated
+    echo
+    echo "Keeping awscli updated"
+    echo
+    pip install --upgrade --user awscli
 
-		echo
-		echo "Copying files to S3"
-		echo
-		aws s3 cp ../dist/$HASH s3://s4c-cdn/spa/$HASH --recursive
+    echo
+    echo "Copying files to S3"
+    echo
+    aws s3 cp ../dist/$HASH s3://s4c-cdn/spa/$HASH --recursive
 
-		echo
-		echo "Sync the build to Github"
-		echo
-		git add ../ --all
-		COMMIT_MESSAGE="[$ENVIRONMENT build] $HASH"
-		git commit -m "$COMMIT_MESSAGE"
-		git push origin "$LOCAL_BRANCH"
+    echo
+    echo "Sync the build to Github"
+    echo
+    git add ../ --all
+    COMMIT_MESSAGE="[$ENVIRONMENT build] $HASH"
+    git commit -m "$COMMIT_MESSAGE"
+    git push origin "$LOCAL_BRANCH"
 
-		echo
-		echo "Deploying to heroku"
-		echo
-		git push -f heroku-$ENVIRONMENT $LOCAL_BRANCH:master
+    echo
+    echo "Deploying to heroku"
+    echo
+    git push -f heroku-$ENVIRONMENT $LOCAL_BRANCH:master
 
-		TO_DELETE=s3://s4c-cdn/spa/$PREV_HASH
-		if [ "$TO_DELETE" != "s3://s4c-cdn/spa/" ]; then
-			echo
-			echo "removing previous hash folder from S3"
-			echo
-			aws s3 rm "$TO_DELETE" --recursive
-		fi
-	else
-		echo
-		echo "No new hash in /dist 🤔"
-		echo
-		echo "Nothing deployed!!!!! 😡"
-		echo
-	fi
+    TO_DELETE=s3://s4c-cdn/spa/$PREV_HASH
+    if [ "$TO_DELETE" != "s3://s4c-cdn/spa/" ]; then
+      echo
+      echo "removing previous hash folder from S3"
+      echo
+      aws s3 rm "$TO_DELETE" --recursive
+    fi
+  else
+    echo
+    echo "No new hash in /dist 🤔"
+    echo
+    echo "Nothing deployed!!!!! 😡"
+    echo
+  fi
 
 fi

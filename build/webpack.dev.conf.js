@@ -5,7 +5,6 @@ var merge                 = require('webpack-merge')
 var baseWebpackConfig     = require('./webpack.base.conf')
 var HtmlWebpackPlugin     = require('html-webpack-plugin')
 var FriendlyErrorsPlugin  = require('friendly-errors-webpack-plugin')
-var TodoWebpackPlugin     = require('todo-webpack-plugin');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -29,10 +28,6 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.tpl.html',
       inject: true
     }),
-    new FriendlyErrorsPlugin(),
-    new TodoWebpackPlugin({
-      console:          false,
-      withInlineFiles:  true
-    }),
+    new FriendlyErrorsPlugin()
   ]
 })
